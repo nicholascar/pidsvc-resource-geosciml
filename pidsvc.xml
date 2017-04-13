@@ -1096,7 +1096,7 @@ http://resource.geosciml.net/static/dataset/</description>
     </conditions>
   </mapping>
   <mapping>
-    <path>/test</path>
+    <path>/test2</path>
     <type>Regex</type>
     <title>Test Mapping</title>
     <creator>pidsvcadmin</creator>
