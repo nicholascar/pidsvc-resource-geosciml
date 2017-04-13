@@ -1095,4 +1095,15 @@ http://resource.geosciml.net/static/dataset/</description>
       </condition>
     </conditions>
   </mapping>
+  <mapping>
+    <path>/test</path>
+    <type>Regex</type>
+    <title>Test Mapping</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://www.google.com.au</value>
+    </action>
+  </mapping>
 </backup>
