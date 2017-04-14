@@ -20,7 +20,7 @@
     <action>
       <type>303</type>
       <name>location</name>
-      <value>http://def.seegrid.csiro.au/sissvoc/isc2012/resource?uri=http://resource.geosciml.net/classifierscheme/cgi/2009/FennoScandianShieldProterozoicTimeScale</value>
+      <value>http://def.seegrid.csiro.au/sissvoc/isc2012/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2009/FennoScandianShieldProterozoicTimeScale</value>
     </action>
   </mapping>
   <mapping>
@@ -32,15 +32,15 @@
 
 Examples:
 
-http://resource.geosciml.net/vocabulary/timescale/isc2013.ttl
-http://resource.geosciml.net/vocabulary/timescale/isc2013.rdf
-http://resource.geosciml.net/vocabulary/timescale/isc2013.html
-http://resource.geosciml.net/vocabulary/timescale/isc2013-opensearch.xml</description>
+http://resource.geosciml.org/vocabulary/timescale/isc2013.ttl
+http://resource.geosciml.org/vocabulary/timescale/isc2013.rdf
+http://resource.geosciml.org/vocabulary/timescale/isc2013.html
+http://resource.geosciml.org/vocabulary/timescale/isc2013-opensearch.xml</description>
     <creator>pidsvcadmin</creator>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/static${RAW:$0}</value>
+      <value>http://resource.geosciml.org/static${RAW:$0}</value>
       <description>get static file</description>
     </action>
   </mapping>
@@ -51,13 +51,13 @@ http://resource.geosciml.net/vocabulary/timescale/isc2013-opensearch.xml</descri
     <description>Maps vocabulary uri to the static directory on the web server.
 
 Examples:
-http://resource.geosciml.net/vocabulary/timescale/isc2013
-http://resource.geosciml.net/vocabulary/timescale/</description>
+http://resource.geosciml.org/vocabulary/timescale/isc2013
+http://resource.geosciml.org/vocabulary/timescale/</description>
     <creator>pidsvcadmin</creator>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/static${RAW:$0}.ttl</value>
+      <value>http://resource.geosciml.org/static${RAW:$0}.ttl</value>
       <description>turtle by default</description>
     </action>
     <conditions>
@@ -68,7 +68,7 @@ http://resource.geosciml.net/vocabulary/timescale/</description>
           <action>
             <type>Proxy</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static${RAW:$0}.html</value>
+            <value>http://resource.geosciml.org/static${RAW:$0}.html</value>
           </action>
         </actions>
       </condition>
@@ -80,7 +80,7 @@ http://resource.geosciml.net/vocabulary/timescale/</description>
           <action>
             <type>Proxy</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static${RAW:$0}.rdf</value>
+            <value>http://resource.geosciml.org/static${RAW:$0}.rdf</value>
           </action>
         </actions>
       </condition>
@@ -91,7 +91,7 @@ http://resource.geosciml.net/vocabulary/timescale/</description>
           <action>
             <type>Proxy</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static${RAW:$0}.ttl</value>
+            <value>http://resource.geosciml.org/static${RAW:$0}.ttl</value>
           </action>
         </actions>
       </condition>
@@ -106,15 +106,15 @@ http://resource.geosciml.net/vocabulary/timescale/</description>
 
 Examples:
 
-http://resource.geosciml.net/vocabulary/timescale/isc2013.ttl
-http://resource.geosciml.net/vocabulary/timescale/isc2013.rdf
-http://resource.geosciml.net/vocabulary/timescale/isc2013.html
-http://resource.geosciml.net/vocabulary/timescale/isc2013-opensearch.xml</description>
+http://resource.geosciml.org/vocabulary/timescale/isc2013.ttl
+http://resource.geosciml.org/vocabulary/timescale/isc2013.rdf
+http://resource.geosciml.org/vocabulary/timescale/isc2013.html
+http://resource.geosciml.org/vocabulary/timescale/isc2013-opensearch.xml</description>
     <creator>pidsvcadmin</creator>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/static${RAW:$0}</value>
+      <value>http://resource.geosciml.org/static${RAW:$0}</value>
       <description>get static file</description>
     </action>
   </mapping>
@@ -125,13 +125,13 @@ http://resource.geosciml.net/vocabulary/timescale/isc2013-opensearch.xml</descri
     <description>Maps ontology uri to the static directory on the web server.
 
 Examples:
-http://resource.geosciml.net/ontology/timescale/thors
-http://resource.geosciml.net/ontology/timescale/rank</description>
+http://resource.geosciml.org/ontology/timescale/thors
+http://resource.geosciml.org/ontology/timescale/rank</description>
     <creator>pidsvcadmin</creator>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/static${RAW:$0}.ttl</value>
+      <value>http://resource.geosciml.org/static${RAW:$0}.ttl</value>
       <description>turtle by default</description>
     </action>
     <conditions>
@@ -142,7 +142,7 @@ http://resource.geosciml.net/ontology/timescale/rank</description>
           <action>
             <type>Proxy</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static${RAW:$0}.html</value>
+            <value>http://resource.geosciml.org/static${RAW:$0}.html</value>
           </action>
         </actions>
       </condition>
@@ -154,7 +154,7 @@ http://resource.geosciml.net/ontology/timescale/rank</description>
           <action>
             <type>Proxy</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static${RAW:$0}.rdf</value>
+            <value>http://resource.geosciml.org/static${RAW:$0}.rdf</value>
           </action>
         </actions>
       </condition>
@@ -165,7 +165,7 @@ http://resource.geosciml.net/ontology/timescale/rank</description>
           <action>
             <type>Proxy</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static${RAW:$0}.ttl</value>
+            <value>http://resource.geosciml.org/static${RAW:$0}.ttl</value>
           </action>
         </actions>
       </condition>
@@ -187,7 +187,7 @@ http://resource.geosciml.net/ontology/timescale/rank</description>
     <path>^(/classifier/cgi/.+?)(\.[^.]*$|$)</path>
     <type>Regex</type>
     <title>classifier/cgi generic mapping</title>
-    <description>Default mapping for resources with the URI stem http://resource.geosciml.net/classifier/cgi/
+    <description>Default mapping for resources with the URI stem http://resource.geosciml.org/classifier/cgi/
 Redirect to the test SISSvoc if not trapped by a child rule in the inheritance tree.</description>
     <creator>pidsvcadmin</creator>
     <action>
@@ -334,7 +334,7 @@ Redirect to the test SISSvoc if not trapped by a child rule in the inheritance t
     <action>
       <type>302</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/classifier/ics/ischart/</value>
+      <value>http://resource.geosciml.org/classifier/ics/ischart/</value>
     </action>
   </mapping>
   <mapping>
@@ -343,13 +343,13 @@ Redirect to the test SISSvoc if not trapped by a child rule in the inheritance t
     <type>Regex</type>
     <title>Dated Vocabulary directory mapping</title>
     <description>Maps dated vocabulary URI to the static directory on the web server. 
-e.g. http://resource.geosciml.net/vocabulary/cgi/201211/ to 
-http://resource.geosciml.net/static/vocabulary/cgi/201211/</description>
+e.g. http://resource.geosciml.org/vocabulary/cgi/201211/ to 
+http://resource.geosciml.org/static/vocabulary/cgi/201211/</description>
     <creator>pidsvcadmin</creator>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/static/vocabulary/cgi/$1/</value>
+      <value>http://resource.geosciml.org/static/vocabulary/cgi/$1/</value>
     </action>
   </mapping>
   <mapping>
@@ -358,13 +358,13 @@ http://resource.geosciml.net/static/vocabulary/cgi/201211/</description>
     <type>Regex</type>
     <title>dataset folder mapping</title>
     <description>Maps the generic dataset directory URI to the static directory on the web server. 
-e.g. http://resource.geosciml.net/dataset/ to 
-http://resource.geosciml.net/static/dataset/</description>
+e.g. http://resource.geosciml.org/dataset/ to 
+http://resource.geosciml.org/static/dataset/</description>
     <creator>pidsvcadmin</creator>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/static/dataset/$1</value>
+      <value>http://resource.geosciml.org/static/dataset/$1</value>
     </action>
   </mapping>
   <mapping>
@@ -376,7 +376,7 @@ http://resource.geosciml.net/static/dataset/</description>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/static/vocabulary/cgi/$1${RAW:$2}.html</value>
+      <value>http://resource.geosciml.org/static/vocabulary/cgi/$1${RAW:$2}.html</value>
       <description>Get HTML file by default</description>
     </action>
     <conditions>
@@ -387,7 +387,7 @@ http://resource.geosciml.net/static/dataset/</description>
           <action>
             <type>Proxy</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static/vocabulary/cgi/$1${RAW:$2}.rdf</value>
+            <value>http://resource.geosciml.org/static/vocabulary/cgi/$1${RAW:$2}.rdf</value>
           </action>
         </actions>
       </condition>
@@ -398,7 +398,7 @@ http://resource.geosciml.net/static/dataset/</description>
           <action>
             <type>Proxy</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static/vocabulary/cgi/$1${RAW:$2}.html</value>
+            <value>http://resource.geosciml.org/static/vocabulary/cgi/$1${RAW:$2}.html</value>
           </action>
         </actions>
       </condition>
@@ -409,7 +409,7 @@ http://resource.geosciml.net/static/dataset/</description>
           <action>
             <type>Proxy</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static/vocabulary/cgi/$1${RAW:$2}.ttl</value>
+            <value>http://resource.geosciml.org/static/vocabulary/cgi/$1${RAW:$2}.ttl</value>
           </action>
         </actions>
       </condition>
@@ -425,7 +425,7 @@ http://resource.geosciml.net/static/dataset/</description>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/static/vocabulary/cgi/$1${RAW:$2}$3</value>
+      <value>http://resource.geosciml.org/static/vocabulary/cgi/$1${RAW:$2}$3</value>
       <description>Get file</description>
     </action>
   </mapping>
@@ -435,13 +435,13 @@ http://resource.geosciml.net/static/dataset/</description>
     <type>Regex</type>
     <title>dataset folder mapping</title>
     <description>Maps the generic dataset directory URI to the static directory on the web server. 
-e.g. http://resource.geosciml.net/dataset/ to 
-http://resource.geosciml.net/static/dataset/</description>
+e.g. http://resource.geosciml.org/dataset/ to 
+http://resource.geosciml.org/static/dataset/</description>
     <creator>pidsvcadmin</creator>
     <action>
       <type>303</type>
       <name>location</name>
-      <value>http://resource.geosciml.net/static/classifierscheme/cgi/$1</value>
+      <value>http://resource.geosciml.org/static/classifierscheme/cgi/$1</value>
     </action>
     <conditions>
       <condition>
@@ -451,7 +451,7 @@ http://resource.geosciml.net/static/dataset/</description>
           <action>
             <type>303</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static/classifierscheme/cgi/index.ttl</value>
+            <value>http://resource.geosciml.org/static/classifierscheme/cgi/index.ttl</value>
           </action>
           <action>
             <type>AddHttpHeader</type>
@@ -467,7 +467,7 @@ http://resource.geosciml.net/static/dataset/</description>
           <action>
             <type>303</type>
             <name>location</name>
-            <value>http://resource.geosciml.net/static/classifierscheme/cgi/index.ttl</value>
+            <value>http://resource.geosciml.org/static/classifierscheme/cgi/index.ttl</value>
           </action>
           <action>
             <type>AddHttpHeader</type>
@@ -486,7 +486,7 @@ http://resource.geosciml.net/static/dataset/</description>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://www.geosciml.net/resource/</value>
+      <value>http://www.geosciml.org/resource/</value>
     </action>
   </mapping>
   <mapping>
