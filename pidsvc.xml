@@ -1095,4 +1095,26 @@ http://resource.geosciml.org/static/dataset/</description>
       </condition>
     </conditions>
   </mapping>
+  <mapping>
+    <path>/vocabulary/timescale/</path>
+    <type>Regex</type>
+    <title>Timescale vocabulary static files</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>Proxy</type>
+      <name>location</name>
+      <value>http://geosciml.org/resource/static/vocabulary/timescale/</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/icons/(.*)</path>
+    <type>Regex</type>
+    <title>Timescale vocabulary static files' icons</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>Proxy</type>
+      <name>location</name>
+      <value>http://geosciml.org/resource/icons/$1</value>
+    </action>
+  </mapping>
 </backup>
