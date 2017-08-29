@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <backup xmlns="urn:csiro:xmlns:pidsvc:backup:1.0" type="partial" scope="db">
   <mapping>
     <path>^(/classifierscheme/ics/(d{4})/(w+))(.[^.]+$|$)</path>
@@ -469,51 +470,6 @@ http://resource.geosciml.org/static/dataset/</description>
             <type>303</type>
             <name>location</name>
             <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource.rdf?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-          </action>
-        </actions>
-      </condition>
-    </conditions>
-  </mapping>
-  <mapping>
-    <path>^/def/voc/$</path>
-    <type>Regex</type>
-    <title>CGI vocabularies register</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>Proxy</type>
-      <name>location</name>
-      <value>http://resource.geosciml.org/vocabs.php</value>
-    </action>
-    <conditions>
-      <condition>
-        <type>QueryString</type>
-        <match>_format=text/turtle</match>
-        <actions>
-          <action>
-            <type>AddHttpHeader</type>
-            <name>Content-Type</name>
-            <value>text/turtle</value>
-          </action>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://resource.geosciml.org/vocabs.ttl</value>
-          </action>
-        </actions>
-      </condition>
-      <condition>
-        <type>HttpHeader</type>
-        <match>Accept=text/turtle</match>
-        <actions>
-          <action>
-            <type>AddHttpHeader</type>
-            <name>Content-Type</name>
-            <value>text/turtle</value>
-          </action>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://resource.geosciml.org/vocabs.ttl</value>
           </action>
         </actions>
       </condition>
@@ -1236,17 +1192,6 @@ Redirect to the test SISSvoc if not trapped by a child rule in the inheritance t
     </action>
   </mapping>
   <mapping>
-    <path>/classifiers/cgi/deformationstyle</path>
-    <type>1:1</type>
-    <title>deformationstyle Collection</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://vocabs.ga.gov.au/cgi/sissvoc/deformation-style/resource?uri=http://resource.geosciml.org/classifiers/cgi/deformationstyle</value>
-    </action>
-  </mapping>
-  <mapping>
     <path>/classifier/cgi/descriptionpurpose</path>
     <type>1:1</type>
     <title>descriptionpurpose Collection</title>
@@ -1674,6 +1619,63 @@ Redirect to the test SISSvoc if not trapped by a child rule in the inheritance t
       <name>location</name>
       <value>http://vocabs.ga.gov.au/cgi/sissvoc/simple-lithology/resource?uri=http://resource.geosciml.org/classifier/cgi/lithology</value>
     </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/deformationstyle</path>
+    <type>1:1</type>
+    <title>deformationstyle Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/deformation-style/resource?uri=http://resource.geosciml.org/classifier/cgi/deformationstyle</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>^/def/voc/$</path>
+    <type>Regex</type>
+    <title>CGI vocabularies register</title>
+    <description>The Linked Data register of CGI vocabs</description>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>Proxy</type>
+      <name>location</name>
+      <value>http://resource.geosciml.org/vocabs.php</value>
+    </action>
+    <conditions>
+      <condition>
+        <type>QueryString</type>
+        <match>_format=text/turtle</match>
+        <actions>
+          <action>
+            <type>AddHttpHeader</type>
+            <name>Content-Type</name>
+            <value>text/turtle</value>
+          </action>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://resource.geosciml.org/vocabs.ttl</value>
+          </action>
+        </actions>
+      </condition>
+      <condition>
+        <type>HttpHeader</type>
+        <match>Accept=text/turtle</match>
+        <actions>
+          <action>
+            <type>AddHttpHeader</type>
+            <name>Content-Type</name>
+            <value>text/turtle</value>
+          </action>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://resource.geosciml.org/vocabs.ttl</value>
+          </action>
+        </actions>
+      </condition>
+    </conditions>
   </mapping>
   <lookup xmlns="urn:csiro:xmlns:pidsvc:backup:1.0">
     <ns>sissvoc-vocab-name</ns>
