@@ -12,18 +12,6 @@
     </action>
   </mapping>
   <mapping>
-    <path>/classifierscheme/cgi/2009/FennoScandianShieldProterozoicTimeScale</path>
-    <type>1:1</type>
-    <title>Concept scheme for 1GE Precambrian extension</title>
-    <description>CGI concept schemes for timescales.</description>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://def.seegrid.csiro.au/sissvoc/isc2012/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2009/FennoScandianShieldProterozoicTimeScale</value>
-    </action>
-  </mapping>
-  <mapping>
     <path>^/vocabulary(.*?)(/|\.\w+)$</path>
     <parent>^/vocabulary(.*?)(/[-\w]+)(?!\.\w+)$</parent>
     <type>Regex</type>
@@ -184,22 +172,8 @@ http://resource.geosciml.org/ontology/timescale/rank</description>
     </action>
   </mapping>
   <mapping>
-    <path>^(/classifier/cgi/.+?)(\.[^.]*$|$)</path>
-    <type>Regex</type>
-    <title>classifier/cgi generic mapping</title>
-    <description>Default mapping for resources with the URI stem http://resource.geosciml.org/classifier/cgi/
-Redirect to the test SISSvoc if not trapped by a child rule in the inheritance tree.</description>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://def.seegrid.csiro.au/sissvoc/cgi201211/resource$2?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-      <description>Terry Removed /api</description>
-    </action>
-  </mapping>
-  <mapping>
     <path>^(/classifier/cgi/stratchart/.+?)(\.[^.]*$|$)</path>
-    <parent>^(/classifier/cgi/.+?)(\.[^.]*$|$)</parent>
+    <parent>/classifier/cgi/(.+)/([^.\s]+)(.html|.json|.rdf|.text|.ttl|.xml)?</parent>
     <type>Regex</type>
     <title>Timescale - classifier/cgi/stratchart mapping</title>
     <creator>pidsvcadmin</creator>
@@ -208,123 +182,6 @@ Redirect to the test SISSvoc if not trapped by a child rule in the inheritance t
       <name>location</name>
       <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource$2?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
     </action>
-  </mapping>
-  <mapping>
-    <path>^(/classifier/ics/ischart/.*?)(\.[^.]*$|$)</path>
-    <type>Regex</type>
-    <title>Timescale - classifier/ics/ischart - generic</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-    </action>
-    <conditions>
-      <condition>
-        <type>ContentType</type>
-        <match>text/turtle</match>
-        <actions>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource.ttl?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-          </action>
-        </actions>
-      </condition>
-      <condition>
-        <type>ContentType</type>
-        <match>text/html</match>
-        <actions>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource.html?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-          </action>
-        </actions>
-      </condition>
-      <condition>
-        <type>ContentType</type>
-        <match>application/rdf\+xml</match>
-        <actions>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource.rdf?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-          </action>
-        </actions>
-      </condition>
-      <condition>
-        <type>ContentType</type>
-        <match>application/json</match>
-        <actions>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource.json?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-          </action>
-        </actions>
-      </condition>
-    </conditions>
-  </mapping>
-  <mapping>
-    <path>^(/classifier/ics/ischart/.*?)(\.[^.]*$)</path>
-    <parent>^(/classifier/ics/ischart/.*?)(\.[^.]*$|$)</parent>
-    <type>Regex</type>
-    <title>Timescale - classifier/ics/ischart with suffix</title>
-    <description>Only match URIs with a file-type suffix</description>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource$2?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-    </action>
-    <conditions>
-      <condition>
-        <type>ComparatorI</type>
-        <match>$2=.json</match>
-        <description>Pavel&amp;apos;s fix to the Extension condition above.</description>
-        <actions>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource.json?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-          </action>
-        </actions>
-      </condition>
-      <condition>
-        <type>ComparatorI</type>
-        <match>$2=.html</match>
-        <actions>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource.html?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-          </action>
-        </actions>
-      </condition>
-      <condition>
-        <type>ComparatorI</type>
-        <match>$2=.ttl</match>
-        <actions>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource.ttl?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-          </action>
-        </actions>
-      </condition>
-      <condition>
-        <type>ComparatorI</type>
-        <match>$2=.rdf</match>
-        <actions>
-          <action>
-            <type>303</type>
-            <name>location</name>
-            <value>http://def.seegrid.csiro.au/sissvoc/isc2014/resource.rdf?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
-          </action>
-        </actions>
-      </condition>
-    </conditions>
   </mapping>
   <mapping>
     <path>/classifier/ics/ischart</path>
@@ -490,565 +347,132 @@ http://resource.geosciml.org/static/dataset/</description>
     </action>
   </mapping>
   <mapping>
-    <path>/classifierscheme/cgi/2016.01/alterationtype</path>
-    <type>1:1</type>
-    <title>Classifier Scheme alterationtype</title>
+    <path>/icons/(.*)</path>
+    <type>Regex</type>
+    <title>Timescale vocabulary static files' icons</title>
     <creator>pidsvcadmin</creator>
     <action>
-      <type>303</type>
+      <type>Proxy</type>
       <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/alteration-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/alterationtype</value>
+      <value>http://geosciml.org/resource/icons/$1</value>
     </action>
   </mapping>
   <mapping>
-    <path>/classifierscheme/cgi/2016.01/commodity-code</path>
-    <type>1:1</type>
-    <title>Classifier Scheme commodity-code</title>
+    <path>^(/classifier/ics/ischart/.*?)(\.[^.]*$|$)</path>
+    <type>Regex</type>
+    <title>Timescale - classifier/ics/ischart - generic</title>
     <creator>pidsvcadmin</creator>
     <action>
       <type>303</type>
       <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/commodity-code/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/commodity-code</value>
+      <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
     </action>
+    <conditions>
+      <condition>
+        <type>ContentType</type>
+        <match>text/turtle</match>
+        <actions>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource.ttl?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
+          </action>
+        </actions>
+      </condition>
+      <condition>
+        <type>ContentType</type>
+        <match>text/html</match>
+        <actions>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource.html?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
+          </action>
+        </actions>
+      </condition>
+      <condition>
+        <type>ContentType</type>
+        <match>application/rdf\+xml</match>
+        <actions>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource.rdf?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
+          </action>
+        </actions>
+      </condition>
+      <condition>
+        <type>ContentType</type>
+        <match>application/json</match>
+        <actions>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource.json?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
+          </action>
+        </actions>
+      </condition>
+    </conditions>
   </mapping>
   <mapping>
-    <path>/classifierscheme/cgi/2016.01/compositioncategory</path>
-    <type>1:1</type>
-    <title>Classifier Scheme compositioncategory</title>
+    <path>^(/classifier/ics/ischart/.*?)(\.[^.]*$)</path>
+    <parent>^(/classifier/ics/ischart/.*?)(\.[^.]*$|$)</parent>
+    <type>Regex</type>
+    <title>Timescale - classifier/ics/ischart with suffix</title>
+    <description>Only match URIs with a file-type suffix</description>
     <creator>pidsvcadmin</creator>
     <action>
       <type>303</type>
       <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/composition-category/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/compositioncategory</value>
+      <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource$2?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
     </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/consolidationdegree</path>
-    <type>1:1</type>
-    <title>Classifier Scheme consolidationdegree</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/consolidation-degree/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/consolidationdegree</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/contacttype</path>
-    <type>1:1</type>
-    <title>Classifier Scheme contacttype</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/contact-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/contacttype</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/conventioncode</path>
-    <type>1:1</type>
-    <title>Classifier Scheme conventioncode</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/convention-code-for-strike-and-dip-measurements/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/conventioncode</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/deformationstyle</path>
-    <type>1:1</type>
-    <title>Classifier Scheme deformationstyle</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/deformation-style/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/deformationstyle</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/descriptionpurpose</path>
-    <type>1:1</type>
-    <title>Classifier Scheme descriptionpurpose</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/description-purpose/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/descriptionpurpose</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/earth-resource-expression</path>
-    <type>1:1</type>
-    <title>Classifier Scheme earth-resource-expression</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/earth-resource-expression/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/earth-resource-expression</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/earth-resource-material-role</path>
-    <type>1:1</type>
-    <title>Classifier Scheme earth-resource-material-role</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/earth-resource-material-role/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/earth-resource-material-role</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/earth-resource-shape</path>
-    <type>1:1</type>
-    <title>Classifier Scheme earth-resource-shape</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/earth-resource-shape/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/earth-resource-shape</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/end-use-potential</path>
-    <type>1:1</type>
-    <title>Classifier Scheme end-use-potential</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/end-use-potential/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/end-use-potential</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/eventenvironment</path>
-    <type>1:1</type>
-    <title>Classifier Scheme eventenvironment</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/event-environment/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/eventenvironment</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/eventprocess</path>
-    <type>1:1</type>
-    <title>Classifier Scheme eventprocess</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/event-process/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/eventprocess</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/exploration-activity-type</path>
-    <type>1:1</type>
-    <title>Classifier Scheme exploration-activity-type</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/exploration-activity-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/exploration-activity-type</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/exploration-result</path>
-    <type>1:1</type>
-    <title>Classifier Scheme exploration-result</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/exploration-result/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/exploration-result</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/faultmovementsense</path>
-    <type>1:1</type>
-    <title>Classifier Scheme faultmovementsense</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/fault-movement-sense/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/faultmovementsense</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/faultmovementtype</path>
-    <type>1:1</type>
-    <title>Classifier Scheme faultmovementtype</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/fault-movement-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/faultmovementtype</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/faulttype</path>
-    <type>1:1</type>
-    <title>Classifier Scheme faulttype</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/fault-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/faulttype</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/geneticcategory</path>
-    <type>1:1</type>
-    <title>Classifier Scheme geneticcategory</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/genetic-category/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/geneticcategory</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/geologicunitmorphology</path>
-    <type>1:1</type>
-    <title>Classifier Scheme geologicunitmorphology</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/geologic-unit-morphology/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/geologicunitmorphology</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/geologicunitpartrole</path>
-    <type>1:1</type>
-    <title>Classifier Scheme geologicunitpartrole</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/geologic-unit-part-role/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/geologicunitpartrole</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/geologicunittype</path>
-    <type>1:1</type>
-    <title>Classifier Scheme geologicunittype</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/geologic-unit-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/geologicunittype</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/lineationtype</path>
-    <type>1:1</type>
-    <title>Classifier Scheme lineationtype</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/lineation-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/lineationtype</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/metamorphicfacies</path>
-    <type>1:1</type>
-    <title>Classifier Scheme metamorphicfacies</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/metamorphic-facies/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/metamorphicfacies</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/metamorphicgrade</path>
-    <type>1:1</type>
-    <title>Classifier Scheme metamorphicgrade</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/metamorphic-grade/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/metamorphicgrade</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/mineral-occurrence-type</path>
-    <type>1:1</type>
-    <title>Classifier Scheme mineral-occurrence-type</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/mineral-occurrence-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mineral-occurrence-type</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/mining-activity</path>
-    <type>1:1</type>
-    <title>Classifier Scheme mining-activity</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/mining-activity/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mining-activity</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/mappedfeatureobservationmethod</path>
-    <type>1:1</type>
-    <title>Classifier Scheme mappedfeatureobservationmethod</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/observation-method-mapped-feature/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mappedfeatureobservationmethod</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/determinationmethodorientation</path>
-    <type>1:1</type>
-    <title>Classifier Scheme determinationmethodorientation</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/orientation-determination-method/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/determinationmethodorientation</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/particleaspectratio</path>
-    <type>1:1</type>
-    <title>Classifier Scheme particleaspectratio</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/particle-aspect-ratio/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/particleaspectratio</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/particleshape</path>
-    <type>1:1</type>
-    <title>Classifier Scheme particleshape</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/particle-shape/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/particleshape</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/particletype</path>
-    <type>1:1</type>
-    <title>Classifier Scheme particletype</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/particle-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/particletype</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/mining-processing-activity</path>
-    <type>1:1</type>
-    <title>Classifier Scheme mining-processing-activity</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/processing-activity/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mining-processing-activity</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/proportionterm</path>
-    <type>1:1</type>
-    <title>Classifier Scheme proportionterm</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/proportion-term/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/proportionterm</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/raw-material-role</path>
-    <type>1:1</type>
-    <title>Classifier Scheme raw-material-role</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/raw-material-role/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/raw-material-role</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/reserve-assessment-category</path>
-    <type>1:1</type>
-    <title>Classifier Scheme reserve-assessment-category</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/reserve-assessment-category/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/reserve-assessment-category</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/resource-assessment-category</path>
-    <type>1:1</type>
-    <title>Classifier Scheme resource-assessment-category</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/resource-assessment-category/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/resource-assessment-category</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/stratigraphicrank</path>
-    <type>1:1</type>
-    <title>Classifier Scheme stratigraphicrank</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/stratigraphic-rank/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/stratigraphicrank</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/unfc</path>
-    <type>1:1</type>
-    <title>Classifier Scheme unfc</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/unfc-code/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/unfc</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/valuequalifier</path>
-    <type>1:1</type>
-    <title>Classifier Scheme valuequalifier</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/value-qualifier/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/valuequalifier</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/vocabularyrelation</path>
-    <type>1:1</type>
-    <title>Classifier Scheme vocabularyrelation</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/vocabulary-relation/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/vocabularyrelation</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/waste-storage</path>
-    <type>1:1</type>
-    <title>Classifier Scheme waste-storage</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/waste-storage/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/waste-storage</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/environmental-impact</path>
-    <type>1:1</type>
-    <title>Classifier Scheme environmental-impact</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/environmental-impact/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/environmental-impact</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/simplelithology</path>
-    <type>1:1</type>
-    <title>Classifier Scheme simplelithology</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/simple-lithology/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/simplelithology</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/compoundmaterialconstituentpartrole</path>
-    <type>1:1</type>
-    <title>Classifier Scheme compoundmaterialconstituentpartr</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/compound-material-constituent-part/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/compoundmaterialconstituentpartrole</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.02/earth-resource-form</path>
-    <type>1:1</type>
-    <title>Classifier Scheme earth-resource-form</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/earth-resource-form/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.02/earth-resource-form</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/mine-status</path>
-    <type>1:1</type>
-    <title>Classifier Scheme mine-status</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/mine-status/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mine-status</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/classification-method-used</path>
-    <type>1:1</type>
-    <title>Classifier Scheme classification-method-used</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/mineral-resource-reporting-classification-method/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/classification-method-used</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/boreholedrillingmethod</path>
-    <type>1:1</type>
-    <title>Classifier Scheme boreholedrillingmethod</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/borehole-drilling-method/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/boreholedrillingmethod</value>
-    </action>
-  </mapping>
-  <mapping>
-    <path>/classifierscheme/cgi/2016.01/foliationtype</path>
-    <type>1:1</type>
-    <title>Classifier Scheme foliationtype</title>
-    <creator>pidsvcadmin</creator>
-    <action>
-      <type>303</type>
-      <name>location</name>
-      <value>http://52.63.163.95/cgi/sissvoc/foliation-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/foliationtype</value>
-    </action>
+    <conditions>
+      <condition>
+        <type>ComparatorI</type>
+        <match>$2=.json</match>
+        <description>Pavel's fix to the Extension condition above.</description>
+        <actions>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource.json?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
+          </action>
+        </actions>
+      </condition>
+      <condition>
+        <type>ComparatorI</type>
+        <match>$2=.html</match>
+        <actions>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource.html?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
+          </action>
+        </actions>
+      </condition>
+      <condition>
+        <type>ComparatorI</type>
+        <match>$2=.ttl</match>
+        <actions>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource.ttl?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
+          </action>
+        </actions>
+      </condition>
+      <condition>
+        <type>ComparatorI</type>
+        <match>$2=.rdf</match>
+        <actions>
+          <action>
+            <type>303</type>
+            <name>location</name>
+            <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource.rdf?uri=${RAW:${ENV:SERVER_ADDR}$1}</value>
+          </action>
+        </actions>
+      </condition>
+    </conditions>
   </mapping>
   <mapping>
     <path>^/def/voc/$</path>
@@ -1058,7 +482,7 @@ http://resource.geosciml.org/static/dataset/</description>
     <action>
       <type>Proxy</type>
       <name>location</name>
-      <value>http://52.62.53.201/resource/vocabs.php</value>
+      <value>http://resource.geosciml.org/vocabs.php</value>
     </action>
     <conditions>
       <condition>
@@ -1073,7 +497,7 @@ http://resource.geosciml.org/static/dataset/</description>
           <action>
             <type>303</type>
             <name>location</name>
-            <value>http://52.62.53.201/resource/vocabs.php?_format=text/turtle</value>
+            <value>http://resource.geosciml.org/vocabs.ttl</value>
           </action>
         </actions>
       </condition>
@@ -1089,21 +513,1380 @@ http://resource.geosciml.org/static/dataset/</description>
           <action>
             <type>303</type>
             <name>location</name>
-            <value>http://52.62.53.201/resource/vocabs.php</value>
+            <value>http://resource.geosciml.org/vocabs.ttl</value>
           </action>
         </actions>
       </condition>
     </conditions>
   </mapping>
   <mapping>
-    <path>/icons/(.*)</path>
+    <path>/classifier/cgi/(.+)/([^.\s]+)(.html|.json|.rdf|.text|.ttl|.xml)?</path>
     <type>Regex</type>
-    <title>Timescale vocabulary static files' icons</title>
+    <title>classifier/cgi generic mapping</title>
+    <description>Default mapping for resources with the URI stem http://resource.geosciml.org/classifier/cgi/
+Redirect to the test SISSvoc if not trapped by a child rule in the inheritance tree.</description>
     <creator>pidsvcadmin</creator>
     <action>
-      <type>Proxy</type>
+      <type>303</type>
       <name>location</name>
-      <value>http://geosciml.org/resource/icons/$1</value>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/${LOOKUP:sissvoc-vocab-name:$1}/resource$3?uri=http://resource.geosciml.org/classifier/cgi/$1/$2</value>
     </action>
   </mapping>
+  <mapping>
+    <path>/vocabulary/timescale/isc2016-12</path>
+    <type>1:1</type>
+    <title>International Chronostratigraphic Chart (2016)</title>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ands.org.au/repository/api/lda/csiro/international-chronostratigraphic-chart-2016/2016-12-v3/resource?uri=http://resource.geosciml.org/vocabulary/timescale/isc2016-12</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/geologicunittype</path>
+    <type>1:1</type>
+    <title>geologicunittype Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/geologic-unit-type/resource?uri=http://resource.geosciml.org/classifier/cgi/geologicunittype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/alterationtype</path>
+    <type>1:1</type>
+    <title>alterationtype Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/alteration-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/alterationtype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/boreholedrillingmethod</path>
+    <type>1:1</type>
+    <title>boreholedrillingmethod Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/borehole-drilling-method/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/boreholedrillingmethod</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/classification-method-used</path>
+    <type>1:1</type>
+    <title>classification-method-used Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/mineral-resource-reporting-classification-method/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/classification-method-used</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/commodity-code</path>
+    <type>1:1</type>
+    <title>commodity-code Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/commodity-code/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/commodity-code</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/compositioncategory</path>
+    <type>1:1</type>
+    <title>compositioncategory Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/composition-category/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/compositioncategory</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/consolidationdegree</path>
+    <type>1:1</type>
+    <title>consolidationdegree Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/consolidation-degree/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/consolidationdegree</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/compoundmaterialconstituentpartrole</path>
+    <type>1:1</type>
+    <title>compoundmaterialconstituentpartrole Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/compound-material-constituent-part/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/compoundmaterialconstituentpartrole</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/conventioncode</path>
+    <type>1:1</type>
+    <title>conventioncode Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/convention-code-for-strike-and-dip-measurements/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/conventioncode</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/contacttype</path>
+    <type>1:1</type>
+    <title>contacttype Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/contact-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/contacttype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/descriptionpurpose</path>
+    <type>1:1</type>
+    <title>descriptionpurpose Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/description-purpose/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/descriptionpurpose</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/deformationstyle</path>
+    <type>1:1</type>
+    <title>deformationstyle Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/deformation-style/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/deformationstyle</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/determinationmethodorientation</path>
+    <type>1:1</type>
+    <title>determinationmethodorientation Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/orientation-determination-method/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/determinationmethodorientation</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/earth-resource-expression</path>
+    <type>1:1</type>
+    <title>earth-resource-expression Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/earth-resource-expression/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/earth-resource-expression</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/end-use-potential</path>
+    <type>1:1</type>
+    <title>end-use-potential Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/end-use-potential/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/end-use-potential</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.02/earth-resource-form</path>
+    <type>1:1</type>
+    <title>earth-resource-form Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/earth-resource-form/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.02/earth-resource-form</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/earth-resource-material-role</path>
+    <type>1:1</type>
+    <title>earth-resource-material-role Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/earth-resource-material-role/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/earth-resource-material-role</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/earth-resource-shape</path>
+    <type>1:1</type>
+    <title>earth-resource-shape Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/earth-resource-shape/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/earth-resource-shape</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/eventenvironment</path>
+    <type>1:1</type>
+    <title>eventenvironment Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/event-environment/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/eventenvironment</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/eventprocess</path>
+    <type>1:1</type>
+    <title>eventprocess Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/event-process/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/eventprocess</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/environmental-impact</path>
+    <type>1:1</type>
+    <title>environmental-impact Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/environmental-impact/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/environmental-impact</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/exploration-activity-type</path>
+    <type>1:1</type>
+    <title>exploration-activity-type Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/exploration-activity-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/exploration-activity-type</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/exploration-result</path>
+    <type>1:1</type>
+    <title>exploration-result Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/exploration-result/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/exploration-result</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/faulttype</path>
+    <type>1:1</type>
+    <title>faulttype Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/fault-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/faulttype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/faultmovementsense</path>
+    <type>1:1</type>
+    <title>faultmovementsense Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/fault-movement-sense/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/faultmovementsense</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/faultmovementtype</path>
+    <type>1:1</type>
+    <title>faultmovementtype Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/fault-movement-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/faultmovementtype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/foliationtype</path>
+    <type>1:1</type>
+    <title>foliationtype Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/foliation-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/foliationtype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/geneticcategory</path>
+    <type>1:1</type>
+    <title>geneticcategory Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/genetic-category/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/geneticcategory</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/geologicunitpartrole</path>
+    <type>1:1</type>
+    <title>geologicunitpartrole Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/geologic-unit-part-role/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/geologicunitpartrole</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/lineationtype</path>
+    <type>1:1</type>
+    <title>lineationtype Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/lineation-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/lineationtype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/geologicunittype</path>
+    <type>1:1</type>
+    <title>geologicunittype Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/geologic-unit-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/geologicunittype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/geologicunitmorphology</path>
+    <type>1:1</type>
+    <title>geologicunitmorphology Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/geologic-unit-morphology/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/geologicunitmorphology</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/metamorphicfacies</path>
+    <type>1:1</type>
+    <title>metamorphicfacies Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/metamorphic-facies/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/metamorphicfacies</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/metamorphicgrade</path>
+    <type>1:1</type>
+    <title>metamorphicgrade Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/metamorphic-grade/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/metamorphicgrade</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/mappedfeatureobservationmethod</path>
+    <type>1:1</type>
+    <title>mappedfeatureobservationmethod Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/observation-method-mapped-feature/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mappedfeatureobservationmethod</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/mine-status</path>
+    <type>1:1</type>
+    <title>mine-status Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/mine-status/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mine-status</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/mineral-occurrence-type</path>
+    <type>1:1</type>
+    <title>mineral-occurrence-type Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/mineral-occurrence-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mineral-occurrence-type</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/mining-activity</path>
+    <type>1:1</type>
+    <title>mining-activity Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/mining-activity/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mining-activity</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/mining-processing-activity</path>
+    <type>1:1</type>
+    <title>mining-processing-activity Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/processing-activity/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/mining-processing-activity</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/particleaspectratio</path>
+    <type>1:1</type>
+    <title>particleaspectratio Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/particle-aspect-ratio/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/particleaspectratio</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/particleshape</path>
+    <type>1:1</type>
+    <title>particleshape Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/particle-shape/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/particleshape</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/particletype</path>
+    <type>1:1</type>
+    <title>particletype Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/particle-type/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/particletype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/raw-material-role</path>
+    <type>1:1</type>
+    <title>raw-material-role Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/raw-material-role/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/raw-material-role</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/reserve-assessment-category</path>
+    <type>1:1</type>
+    <title>reserve-assessment-category Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/reserve-assessment-category/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/reserve-assessment-category</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/proportionterm</path>
+    <type>1:1</type>
+    <title>proportionterm Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/proportion-term/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/proportionterm</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/resource-assessment-category</path>
+    <type>1:1</type>
+    <title>resource-assessment-category Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/resource-assessment-category/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/resource-assessment-category</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/simplelithology</path>
+    <type>1:1</type>
+    <title>simplelithology Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/simple-lithology/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/simplelithology</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/stratigraphicrank</path>
+    <type>1:1</type>
+    <title>stratigraphicrank Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/stratigraphic-rank/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/stratigraphicrank</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/unfc</path>
+    <type>1:1</type>
+    <title>unfc Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/unfc-code/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/unfc</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/valuequalifier</path>
+    <type>1:1</type>
+    <title>valuequalifier Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/value-qualifier/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/valuequalifier</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/waste-storage</path>
+    <type>1:1</type>
+    <title>waste-storage Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/waste-storage/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/waste-storage</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2016.01/vocabularyrelation</path>
+    <type>1:1</type>
+    <title>vocabularyrelation Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/vocabulary-relation/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2016.01/vocabularyrelation</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/lineationtype</path>
+    <type>1:1</type>
+    <title>lineationtype Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/lineation-type/resource?uri=http://resource.geosciml.org/classifier/cgi/lineationtype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifierscheme/cgi/2009/FennoScandianShieldProterozoicTimeScale</path>
+    <type>1:1</type>
+    <title>1GE Precambrian extension Concept Scheme</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://def.seegrid.csiro.au/sissvoc/isc2012/resource?uri=http://resource.geosciml.org/classifierscheme/cgi/2009/FennoScandianShieldProterozoicTimeScale</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/alterationtype</path>
+    <type>1:1</type>
+    <title>alterationtype Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/alteration-type/resource?uri=http://resource.geosciml.org/classifier/cgi/alterationtype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/boreholedrillingmethod</path>
+    <type>1:1</type>
+    <title>boreholedrillingmethod Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/borehole-drilling-method/resource?uri=http://resource.geosciml.org/classifier/cgi/boreholedrillingmethod</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/classification-method-used</path>
+    <type>1:1</type>
+    <title>classification-method-used Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/mineral-resource-reporting-classification-method/resource?uri=http://resource.geosciml.org/classifier/cgi/classification-method-used</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/commodity-code</path>
+    <type>1:1</type>
+    <title>commodity-code Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/commodity-code/resource?uri=http://resource.geosciml.org/classifier/cgi/commodity-code</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/compositioncategory</path>
+    <type>1:1</type>
+    <title>compositioncategory Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/composition-category/resource?uri=http://resource.geosciml.org/classifier/cgi/compositioncategory</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/compoundmaterialconstituentpartrole</path>
+    <type>1:1</type>
+    <title>compoundmaterialconstituentpartrole Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/compound-material-constituent-part/resource?uri=http://resource.geosciml.org/classifier/cgi/compoundmaterialconstituentpartrole</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/consolidationdegree</path>
+    <type>1:1</type>
+    <title>consolidationdegree Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/consolidation-degree/resource?uri=http://resource.geosciml.org/classifier/cgi/consolidationdegree</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/contacttype</path>
+    <type>1:1</type>
+    <title>contacttype Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/contact-type/resource?uri=http://resource.geosciml.org/classifier/cgi/contacttype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/conventioncode</path>
+    <type>1:1</type>
+    <title>conventioncode Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/convention-code-for-strike-and-dip-measurements/resource?uri=http://resource.geosciml.org/classifier/cgi/conventioncode</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifiers/cgi/deformationstyle</path>
+    <type>1:1</type>
+    <title>deformationstyle Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/deformation-style/resource?uri=http://resource.geosciml.org/classifiers/cgi/deformationstyle</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/descriptionpurpose</path>
+    <type>1:1</type>
+    <title>descriptionpurpose Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/description-purpose/resource?uri=http://resource.geosciml.org/classifier/cgi/descriptionpurpose</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/determinationmethodorientation</path>
+    <type>1:1</type>
+    <title>determinationmethodorientation Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/orientation-determination-method/resource?uri=http://resource.geosciml.org/classifier/cgi/determinationmethodorientation</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/earth-resource-expression</path>
+    <type>1:1</type>
+    <title>earth-resource-expression Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/earth-resource-expression/resource?uri=http://resource.geosciml.org/classifier/cgi/earth-resource-expression</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/earth-resource-form</path>
+    <type>1:1</type>
+    <title>earth-resource-form Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/earth-resource-form/resource?uri=http://resource.geosciml.org/classifier/cgi/earth-resource-form</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/earth-resource-material-role</path>
+    <type>1:1</type>
+    <title>earth-resource-material-role Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/earth-resource-material-role/resource?uri=http://resource.geosciml.org/classifier/cgi/earth-resource-material-role</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/earth-resource-shape</path>
+    <type>1:1</type>
+    <title>earth-resource-shape Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/earth-resource-shape/resource?uri=http://resource.geosciml.org/classifier/cgi/earth-resource-shape</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/end-use-potential</path>
+    <type>1:1</type>
+    <title>end-use-potential Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/end-use-potential/resource?uri=http://resource.geosciml.org/classifier/cgi/end-use-potential</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/environmental-impact</path>
+    <type>1:1</type>
+    <title>environmental-impact Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/environmental-impact/resource?uri=http://resource.geosciml.org/classifier/cgi/environmental-impact</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/eventenvironment</path>
+    <type>1:1</type>
+    <title>eventenvironment Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/event-environment/resource?uri=http://resource.geosciml.org/classifier/cgi/eventenvironment</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/eventprocess</path>
+    <type>1:1</type>
+    <title>eventprocess Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/event-process/resource?uri=http://resource.geosciml.org/classifier/cgi/eventprocess</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/exploration-activity-type</path>
+    <type>1:1</type>
+    <title>exploration-activity-type Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/exploration-activity-type/resource?uri=http://resource.geosciml.org/classifier/cgi/exploration-activity-type</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/exploration-result</path>
+    <type>1:1</type>
+    <title>exploration-result Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/exploration-result/resource?uri=http://resource.geosciml.org/classifier/cgi/exploration-result</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/faultmovementsense</path>
+    <type>1:1</type>
+    <title>faultmovementsense Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/fault-movement-sense/resource?uri=http://resource.geosciml.org/classifier/cgi/faultmovementsense</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/faultmovementtype</path>
+    <type>1:1</type>
+    <title>faultmovementtype Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/fault-movement-type/resource?uri=http://resource.geosciml.org/classifier/cgi/faultmovementtype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/faulttype</path>
+    <type>1:1</type>
+    <title>faulttype Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/fault-type/resource?uri=http://resource.geosciml.org/classifier/cgi/faulttype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/foliationtype</path>
+    <type>1:1</type>
+    <title>foliationtype Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/foliation-type/resource?uri=http://resource.geosciml.org/classifier/cgi/foliationtype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/geneticcategory</path>
+    <type>1:1</type>
+    <title>geneticcategory Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/genetic-category/resource?uri=http://resource.geosciml.org/classifier/cgi/geneticcategory</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/geologicunitmorphology</path>
+    <type>1:1</type>
+    <title>geologicunitmorphology Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/geologic-unit-morphology/resource?uri=http://resource.geosciml.org/classifier/cgi/geologicunitmorphology</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/geologicunitpartrole</path>
+    <type>1:1</type>
+    <title>geologicunitpartrole Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/geologic-unit-part-role/resource?uri=http://resource.geosciml.org/classifier/cgi/geologicunitpartrole</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/mappedfeatureobservationmethod</path>
+    <type>1:1</type>
+    <title>mappedfeatureobservationmethod Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/observation-method-mapped-feature/resource?uri=http://resource.geosciml.org/classifier/cgi/mappedfeatureobservationmethod</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/metamorphicfacies</path>
+    <type>1:1</type>
+    <title>metamorphicfacies Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/metamorphic-facies/resource?uri=http://resource.geosciml.org/classifier/cgi/metamorphicfacies</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/metamorphicgrade</path>
+    <type>1:1</type>
+    <title>metamorphicgrade Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/metamorphic-grade/resource?uri=http://resource.geosciml.org/classifier/cgi/metamorphicgrade</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/mineral-occurrence-type</path>
+    <type>1:1</type>
+    <title>mineral-occurrence-type Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/mineral-occurrence-type/resource?uri=http://resource.geosciml.org/classifier/cgi/mineral-occurrence-type</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/mine-status</path>
+    <type>1:1</type>
+    <title>mine-status Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/mine-status/resource?uri=http://resource.geosciml.org/classifier/cgi/mine-status</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/mining-activity</path>
+    <type>1:1</type>
+    <title>mining-activity Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/mining-activity/resource?uri=http://resource.geosciml.org/classifier/cgi/mining-activity</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/mining-processing-activity</path>
+    <type>1:1</type>
+    <title>mining-processing-activity Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/processing-activity/resource?uri=http://resource.geosciml.org/classifier/cgi/mining-processing-activity</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/particleaspectratio</path>
+    <type>1:1</type>
+    <title>particleaspectratio Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/particle-aspect-ratio/resource?uri=http://resource.geosciml.org/classifier/cgi/particleaspectratio</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/particleshape</path>
+    <type>1:1</type>
+    <title>particleshape Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/particle-shape/resource?uri=http://resource.geosciml.org/classifier/cgi/particleshape</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/particletype</path>
+    <type>1:1</type>
+    <title>particletype Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/particle-type/resource?uri=http://resource.geosciml.org/classifier/cgi/particletype</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/proportionterm</path>
+    <type>1:1</type>
+    <title>proportionterm Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/proportion-term/resource?uri=http://resource.geosciml.org/classifier/cgi/proportionterm</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/raw-material-role</path>
+    <type>1:1</type>
+    <title>raw-material-role Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/raw-material-role/resource?uri=http://resource.geosciml.org/classifier/cgi/raw-material-role</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/reserve-assessment-category</path>
+    <type>1:1</type>
+    <title>reserve-assessment-category Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/reserve-assessment-category/resource?uri=http://resource.geosciml.org/classifier/cgi/reserve-assessment-category</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/resource-assessment-category</path>
+    <type>1:1</type>
+    <title>resource-assessment-category Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/resource-assessment-category/resource?uri=http://resource.geosciml.org/classifier/cgi/resource-assessment-category</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/stratigraphicrank</path>
+    <type>1:1</type>
+    <title>stratigraphicrank Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/stratigraphic-rank/resource?uri=http://resource.geosciml.org/classifier/cgi/stratigraphicrank</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/unfc</path>
+    <type>1:1</type>
+    <title>unfc Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/unfc-code/resource?uri=http://resource.geosciml.org/classifier/cgi/unfc</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/valuequalifier</path>
+    <type>1:1</type>
+    <title>valuequalifier Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/value-qualifier/resource?uri=http://resource.geosciml.org/classifier/cgi/valuequalifier</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/vocabularyrelation</path>
+    <type>1:1</type>
+    <title>vocabularyrelation Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/vocabulary-relation/resource?uri=http://resource.geosciml.org/classifier/cgi/vocabularyrelation</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/waste-storage</path>
+    <type>1:1</type>
+    <title>waste-storage Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/waste-storage/resource?uri=http://resource.geosciml.org/classifier/cgi/waste-storage</value>
+    </action>
+  </mapping>
+  <mapping>
+    <path>/classifier/cgi/lithology</path>
+    <type>1:1</type>
+    <title>simplelithology Collection</title>
+    <creator>pidsvcadmin</creator>
+    <action>
+      <type>303</type>
+      <name>location</name>
+      <value>http://vocabs.ga.gov.au/cgi/sissvoc/simple-lithology/resource?uri=http://resource.geosciml.org/classifier/cgi/lithology</value>
+    </action>
+  </mapping>
+  <lookup xmlns="urn:csiro:xmlns:pidsvc:backup:1.0">
+    <ns>sissvoc-vocab-name</ns>
+    <default type="Constant"/>
+    <Static>
+      <pair>
+        <key>alterationtype</key>
+        <value>alteration-type</value>
+      </pair>
+      <pair>
+        <key>boreholedrillingmethod</key>
+        <value>borehole-drilling-method</value>
+      </pair>
+      <pair>
+        <key>commodity-code</key>
+        <value>commodity-code</value>
+      </pair>
+      <pair>
+        <key>compositioncategory</key>
+        <value>composition-category</value>
+      </pair>
+      <pair>
+        <key>compoundmaterialconstituentpart</key>
+        <value>compound-material-constituent-part</value>
+      </pair>
+      <pair>
+        <key>consolidationdegree</key>
+        <value>consolidation-degree</value>
+      </pair>
+      <pair>
+        <key>contacttype</key>
+        <value>contact-type</value>
+      </pair>
+      <pair>
+        <key>conventioncode</key>
+        <value>convention-code-for-strike-and-dip-measurements</value>
+      </pair>
+      <pair>
+        <key>deformationstyle</key>
+        <value>deformation-style</value>
+      </pair>
+      <pair>
+        <key>descriptionpurpose</key>
+        <value>description-purpose</value>
+      </pair>
+      <pair>
+        <key>determinationmethodorientation</key>
+        <value>orientation-determination-method</value>
+      </pair>
+      <pair>
+        <key>earth-resource-expression</key>
+        <value>earth-resource-expression</value>
+      </pair>
+      <pair>
+        <key>earth-resource-form</key>
+        <value>earth-resource-form</value>
+      </pair>
+      <pair>
+        <key>earth-resource-material-role</key>
+        <value>earth-resource-material-role</value>
+      </pair>
+      <pair>
+        <key>earth-resource-shape</key>
+        <value>earth-resource-shape</value>
+      </pair>
+      <pair>
+        <key>end-use-potential</key>
+        <value>end-use-potential</value>
+      </pair>
+      <pair>
+        <key>environmental-impact</key>
+        <value>environmental-impact</value>
+      </pair>
+      <pair>
+        <key>eventenvironment</key>
+        <value>event-environment</value>
+      </pair>
+      <pair>
+        <key>eventprocess</key>
+        <value>event-process</value>
+      </pair>
+      <pair>
+        <key>exploration-activity-type</key>
+        <value>exploration-activity-type</value>
+      </pair>
+      <pair>
+        <key>exploration-result</key>
+        <value>exploration-result</value>
+      </pair>
+      <pair>
+        <key>faultmovementsense</key>
+        <value>fault-movement-sense</value>
+      </pair>
+      <pair>
+        <key>faultmovementtype</key>
+        <value>fault-movement-type</value>
+      </pair>
+      <pair>
+        <key>faulttype</key>
+        <value>fault-type</value>
+      </pair>
+      <pair>
+        <key>foliationtype</key>
+        <value>foliation-type</value>
+      </pair>
+      <pair>
+        <key>geneticcategory</key>
+        <value>genetic-category</value>
+      </pair>
+      <pair>
+        <key>geologicfeatureobservationmethod</key>
+        <value>observation-method-geologic-feature</value>
+      </pair>
+      <pair>
+        <key>geologicunitmorphology</key>
+        <value>geologic-unit-morphology</value>
+      </pair>
+      <pair>
+        <key>geologicunitpartrole</key>
+        <value>geologic-unit-part-role</value>
+      </pair>
+      <pair>
+        <key>geologicunittype</key>
+        <value>geologic-unit-type</value>
+      </pair>
+      <pair>
+        <key>lineationtype</key>
+        <value>lineation-type</value>
+      </pair>
+      <pair>
+        <key>mappedfeatureobservationmethod</key>
+        <value>observation-method-mapped-feature</value>
+      </pair>
+      <pair>
+        <key>metamorphicfacies</key>
+        <value>metamorphic-facies</value>
+      </pair>
+      <pair>
+        <key>metamorphicgrade</key>
+        <value>metamorphic-grade</value>
+      </pair>
+      <pair>
+        <key>mine-status</key>
+        <value>mine-status</value>
+      </pair>
+      <pair>
+        <key>mineral-occurrence-type</key>
+        <value>mineral-occurrence-type</value>
+      </pair>
+      <pair>
+        <key>classification-method-used</key>
+        <value>mineral-resource-reporting-classification-method</value>
+      </pair>
+      <pair>
+        <key>mining-activity</key>
+        <value>mining-activity</value>
+      </pair>
+      <pair>
+        <key>particleaspectratio</key>
+        <value>particle-aspect-ratio</value>
+      </pair>
+      <pair>
+        <key>particleshape</key>
+        <value>particle-shape</value>
+      </pair>
+      <pair>
+        <key>particletype</key>
+        <value>particle-type</value>
+      </pair>
+      <pair>
+        <key>processing-activity</key>
+        <value>processing-activity</value>
+      </pair>
+      <pair>
+        <key>proportionterm</key>
+        <value>proportion-term</value>
+      </pair>
+      <pair>
+        <key>reserve-assessment-category</key>
+        <value>reserve-assessment-category</value>
+      </pair>
+      <pair>
+        <key>resource-assessment-category</key>
+        <value>resource-assessment-category</value>
+      </pair>
+      <pair>
+        <key>simplelithology</key>
+        <value>simple-lithology</value>
+      </pair>
+      <pair>
+        <key>stratigraphicrank</key>
+        <value>stratigraphic-rank</value>
+      </pair>
+      <pair>
+        <key>unfc-code</key>
+        <value>unfc-code</value>
+      </pair>
+      <pair>
+        <key>valuequalifier</key>
+        <value>value-qualifier</value>
+      </pair>
+      <pair>
+        <key>vocabularyrelation</key>
+        <value>vocabulary-relation</value>
+      </pair>
+      <pair>
+        <key>waste-storage</key>
+        <value>waste-storage</value>
+      </pair>
+      <pair>
+        <key>lithology</key>
+        <value>simple-lithology</value>
+      </pair>
+    </Static>
+  </lookup>
 </backup>
